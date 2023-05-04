@@ -37,6 +37,28 @@ export const getPokemonTypes = () => async dispatch => {
   }
 };
 
+export const getOnePokemon = (pokemonId) => async dispatch => {
+  const res = await fetch(`/api/pokemon/${pokemonId}`);
+  if (res.ok) {
+    const data = await res.json() 
+    dispatch(addOnePokemon(data))
+  }
+}
+
+export const createPokemonForm = (payload) => async dispatch => {
+  const res = await fetch('/api/pokemon', {
+    headers: {"Content-Type": "application/json"}, 
+    method: "Post", 
+    body: JSON.stringify(payload)
+  }); 
+
+  if (res.ok) {
+    const data = await res.json(); 
+    dispatch(addOnePokemon(data))
+  }
+
+}
+
 const initialState = {
   list: [],
   types: []

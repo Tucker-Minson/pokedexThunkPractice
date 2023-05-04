@@ -13,6 +13,7 @@ const PokemonBrowser = () => {
   const pokemon = useSelector(state => {
     return state.pokemon.list.map(pokemonId => state.pokemon[pokemonId]);
   });
+  
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
