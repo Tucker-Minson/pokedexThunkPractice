@@ -1,18 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink, Route, useParams } from 'react-router-dom';
-
+import { useDispatch } from 'react-redux';
 import PokemonDetail from './PokemonDetail';
 import CreatePokemonForm from './CreatePokemonForm';
 import Fab from './Fab';
+import { getPokemon } from '../store/pokemon';
 
 const PokemonBrowser = () => {
   const { pokemonId } = useParams();
+  const dispatch = useDispatch(); 
   const pokemon = useSelector(state => {
     return state.pokemon.list.map(pokemonId => state.pokemon[pokemonId]);
   });
   const [showForm, setShowForm] = useState(false);
 
+  useEffect(() => {
+    dispatch(getPokemon()); 
+  }, [])
 
   if (!pokemon) {
     return null;
